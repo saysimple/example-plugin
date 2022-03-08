@@ -36,6 +36,6 @@ contentComponent.install = install;
 settingsComponent.install = install;
 
 // Export component by default
-export const content = contentComponent;
-export const settings = settingsComponent;
+export const ExampleContent = contentComponent;
+export const ExampleSettings = settingsComponent;
 
