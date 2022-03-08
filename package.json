@@ -1,5 +1,5 @@
 {
-  "name": "@thom/example-v2-plugin",
+  "name": "@saysimple-plugins/example",
   "version": "1.0.0",
   "description": "",
   "main": "dist/example.ssr.js",
@@ -55,6 +55,6 @@
     "icon": "./dist/icon.png"
   },
   "publishConfig": {
-    "@thom:registry": "https://gitlab.just-internet.nl/api/v4/projects/245/packages/npm/"
+    "@saysimple-plugins:registry": "https://gitlab.just-internet.nl/api/v4/projects/246/packages/npm/"
   }
 }
