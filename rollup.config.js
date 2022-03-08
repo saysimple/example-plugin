@@ -1,12 +1,14 @@
-import vue from 'rollup-plugin-vue';
-import buble from 'rollup-plugin-buble';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
-import { terser } from 'rollup-plugin-terser';
-import resolve from 'rollup-plugin-node-resolve';
-import css from 'rollup-plugin-css-only';
-import minimist from 'minimist';
-import pkg from './package.json';
+import minimist from "minimist";
+import buble from "rollup-plugin-buble";
+import commonjs from "rollup-plugin-commonjs";
+import css from "rollup-plugin-css-only";
+import resolve from "rollup-plugin-node-resolve";
+import replace from "rollup-plugin-replace";
+import { terser } from "rollup-plugin-terser";
+import vue from "rollup-plugin-vue";
+import pkg from "./package.json";
+
+const { default: i18n } = require('@intlify/rollup-plugin-vue-i18n');
 
 const argv = minimist(process.argv.slice(2));
 
@@ -18,6 +20,7 @@ const baseConfig = {
                         'process.env.NODE_ENV': JSON.stringify('production'),
                     }),
             commonjs(),
+            i18n(),
         ],
         vue: {
             css: true,
@@ -33,6 +36,13 @@ const baseConfig = {
                   }),
         ],
     },
+
+    external: [
+        // Externalize so that the output code is readable.
+        "vue",
+        "vue-runtime-helpers",
+        'vue-i18n',
+    ],
 };
 
 // Customize configs for individual targets

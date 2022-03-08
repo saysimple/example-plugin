@@ -16,6 +16,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@intlify/rollup-plugin-vue-i18n": "^3.0.1",
+    "@rollup/plugin-json": "^4.1.0",
     "@shopify/jest-dom-mocks": "^2.8.11",
     "@vue/test-utils": "^1.0.0-beta.33",
     "@vuedoc/md": "^1.6.0",
