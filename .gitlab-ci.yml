@@ -1,0 +1,17 @@
+image: node:12.16
+
+stages:
+    - publish
+
+deploy:
+    stage: publish
+    script:
+        - echo "@saysimple-plugins:registry=https://gitlab.just-internet.nl/api/v4/packages/npm/">.npmrc
+        - echo "//gitlab.just-internet.nl/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">>.npmrc
+        - npm version --no-git-tag-version --allow-same-version $(npm view @thom/example-v2-plugin@latest version)
+        - npm version --no-git-tag-version patch
+        - npm publish --verbose
+    tags:
+        - build
+    only:
+        - master

@@ -1,5 +1,5 @@
 {
-  "name": "@saysimple-plugins/example",
+  "name": "@thom/example-v2-plugin",
   "version": "1.0.0",
   "description": "",
   "main": "dist/example.ssr.js",
@@ -8,6 +8,7 @@
   "style": "dist/example.css",
   "scripts": {
     "prebuild": "rm -rf dist/",
+    "prepublish": "npm run build",
     "build": "NODE_ENV=production rollup --c rollup.config.js"
   },
   "author": "",
@@ -52,5 +53,8 @@
   "saysimple": {
     "name": "example",
     "icon": "./dist/icon.png"
+  },
+  "publishConfig": {
+    "@thom:registry": "https://gitlab.just-internet.nl/api/v4/projects/245/packages/npm/"
   }
 }
