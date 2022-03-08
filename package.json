@@ -7,9 +7,9 @@
   "unpkg": "dist/example.min.js",
   "style": "dist/example.css",
   "scripts": {
+    "build": "NODE_ENV=production rollup --c rollup.config.js",
     "prebuild": "rm -rf dist/",
-    "prepublish": "npm run build",
-    "build": "NODE_ENV=production rollup --c rollup.config.js"
+    "prepublishOnly": "npm run build"
   },
   "author": "",
   "license": "ISC",

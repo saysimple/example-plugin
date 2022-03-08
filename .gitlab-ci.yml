@@ -9,6 +9,9 @@ deploy:
         - echo "@${CI_PROJECT_NAMESPACE}:registry=https://gitlab.just-internet.nl/api/v4/packages/npm/" > .npmrc
         - echo "//gitlab.just-internet.nl/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
         - echo "//gitlab.just-internet.nl/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+        # unsafe-perm is required as this pipeline runs as "root", which npm sees as unsafe
+        - echo "unsafe-perm=true" >> .npmrc
+        - npm ci
         - npm version --no-git-tag-version --allow-same-version $(npm view @${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}@latest version)
         - npm version --no-git-tag-version patch
         - npm publish --verbose
