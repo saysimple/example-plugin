@@ -15,7 +15,7 @@ function install(Vue) {
 }
 
 // Create module definition for Vue.use()
-const plugin = {
+const module = {
   install,
 };
 
@@ -27,7 +27,7 @@ if (typeof window !== "undefined") {
   GlobalVue = global.Vue;
 }
 if (GlobalVue) {
-  GlobalVue.use(plugin);
+  GlobalVue.use(module);
 }
 
 // Inject install function into component - allows component
@@ -37,5 +37,10 @@ settingsComponent.install = install;
 
 // Export component by default
 export const name = appName;
+export const plugin = {
+  name: pkg.name,
+  version: pkg.version,
+  saysimple: pkg.saysimple,
+};
 export const ExampleContent = contentComponent;
 export const ExampleSettings = settingsComponent;

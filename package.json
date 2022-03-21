@@ -1,6 +1,6 @@
 {
   "name": "@saysimple-plugins/example",
-  "version": "1.0.0",
+  "version": "1.0.0-local",
   "description": "",
   "main": "dist/example.ssr.js",
   "module": "dist/example.esm.js",
