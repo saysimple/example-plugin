@@ -1,10 +1,13 @@
 <template>
     <section>
         <form id="lef" method="post" @submit="submitForm">
-            <pre>
-                {{ JSON.stringify(plugin, null, "\t") }}
+            <pre
+                >{{ JSON.stringify(app, null, "\t") }}
             </pre>
 
+            <code> Active: {{ activeSetting }}, {{ active }} </code>
+
+            <b-button>{{ $t("Save") }}</b-button>
             <input class="button save" type="submit" :value="$t('Save')" />
         </form>
     </section>
@@ -21,59 +24,45 @@
 </style>
 
 <script>
+import { BButton } from "bootstrap-vue";
+
 export default {
-    components: {},
+    components: {
+        BButton,
+    },
     props: {
-        plugin: {
+        app: {
             type: Object,
-            default: {},
+            required: true,
         },
     },
-    data() {
+    setup({ app }) {
         return {
-            carModels: null,
-            active: null,
+            carModels: [],
+            active: app.appTools.getSetting("active"),
             apiUrl: null,
             apiUser: null,
             apiKey: null,
-            apiUrls: [
-                {
-                    label: this.$t("Live"),
-                    url: "https://api.mijnlef.nl/leads/new/",
-                },
-                {
-                    label: this.$t("Acceptance"),
-                    url: "https://api-acc.mijnlef.nl/leads/new/",
-                },
-            ],
+            apiUrls: [],
         };
-    },
-    created() {
-        // Load plugin settings into model
-        // this.carModels = this.plugin.getSetting("carModels").join("\n");
-        // this.active = this.plugin.getSetting("active");
-        // this.apiUrl = this.plugin.getSetting("api.url");
-        // this.apiUser = this.plugin.getSetting("api.username");
-        // this.apiKey = this.plugin.getSetting("api.password");
     },
     methods: {
         toggleActive() {
-            this.active ^= 1; // Toggle between 0 and 1
+            this.active = !this.active; // Toggle between 0 and 1
             return this.active;
         },
         submitForm(event) {
             event.preventDefault();
 
-            $nuxt.$emit("savePluginSettings", {
-                name: this.plugin.name,
-                active: Number(this.active),
-                carModels: this.carModels.split("\n").filter((model) => model),
-                api: {
-                    url: this.apiUrl,
-                    username: this.apiUser,
-                    password: this.apiKey,
-                },
-            });
+            this.toggleActive();
+
+            console.log("START SAVE DATA");
+            this.app.appTools.saveData("active", this.active).then(() => console.log("END SAVE DATA"));
+        },
+    },
+    computed: {
+        activeSetting() {
+            return this.app.appTools.getSetting("active");
         },
     },
 };

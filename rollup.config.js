@@ -120,6 +120,9 @@ if (!argv.format || argv.format === 'iife') {
             exports: 'named',
             sourcemap: true,
             extend: true,
+            globals: {
+                vue: "Vue",
+            },
         },
         plugins: [
             ...baseConfig.plugins.preVue,

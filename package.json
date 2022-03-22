@@ -8,6 +8,7 @@
   "style": "dist/example.css",
   "scripts": {
     "build": "NODE_ENV=production rollup --c rollup.config.js",
+    "watch": "NODE_ENV=production rollup --c rollup.config.js -w",
     "prebuild": "rm -rf dist/",
     "prepublishOnly": "npm run build"
   },
