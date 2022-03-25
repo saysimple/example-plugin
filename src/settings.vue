@@ -1,14 +1,10 @@
 <template>
     <section>
-        <form id="lef" method="post" @submit="submitForm">
-            <pre
-                >{{ JSON.stringify(app, null, "\t") }}
-            </pre>
-
-            <code> Active: {{ activeSetting }}, {{ active }} </code>
-
-            <b-button>{{ $t("Save") }}</b-button>
-            <input class="button save" type="submit" :value="$t('Save')" />
+        <form id="example" method="post" @submit="submitForm">
+            <div>
+                <label><input type="checkbox" v-model="active" /> {{ active }}</label>
+            </div>
+            <b-button @click="submitForm">{{ $t("Save") }}</b-button>
         </form>
     </section>
 </template>
@@ -24,11 +20,12 @@
 </style>
 
 <script>
-import { BButton } from "bootstrap-vue";
+import { BButton, BFormCheckbox } from "bootstrap-vue";
 
 export default {
     components: {
         BButton,
+        BFormCheckbox,
     },
     props: {
         app: {
@@ -36,10 +33,10 @@ export default {
             required: true,
         },
     },
-    setup({ app }) {
+    data() {
         return {
+            active: false,
             carModels: [],
-            active: app.appTools.getSetting("active"),
             apiUrl: null,
             apiUser: null,
             apiKey: null,
@@ -47,22 +44,15 @@ export default {
         };
     },
     methods: {
-        toggleActive() {
-            this.active = !this.active; // Toggle between 0 and 1
-            return this.active;
-        },
-        submitForm(event) {
-            event.preventDefault();
+        async submitForm(...event) {
+            //event.preventDefault();
 
-            this.toggleActive();
+            console.log(event);
 
-            console.log("START SAVE DATA");
-            this.app.appTools.saveData("active", this.active).then(() => console.log("END SAVE DATA"));
+            await this.app.utils.saveData("active", this.active);
         },
-    },
-    computed: {
-        activeSetting() {
-            return this.app.appTools.getSetting("active");
+        setActive(state) {
+            this.active = state;
         },
     },
 };

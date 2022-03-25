@@ -1,27 +1,28 @@
 <template>
-  <section>
-    <h1>{{ $t("TEST_EXAMPLE") }}</h1>
-  </section>
+    <section>
+        <h1>{{ $t("TEST_EXAMPLE") }}</h1>
+    </section>
 </template>
 
 <script>
-
 export default {
-  components: {},
-  props: {
-  },
-  created() {
-  },
-  activated() {
-  },
-  methods: {
-  },
+    data() {},
+    components: {},
+    props: {
+        app: {
+            type: Object,
+            required: true,
+        },
+    },
+    created() {},
+    activated() {},
+    methods: {},
 };
 </script>
 
 <style scoped lang="scss">
 section {
-  background: red;
+    background: red;
 }
 </style>
 
