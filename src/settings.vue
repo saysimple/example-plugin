@@ -1,11 +1,9 @@
 <template>
     <section>
-        <form id="example" method="post" @submit="submitForm">
-            <div>
-                <label><input type="checkbox" v-model="active" /> {{ active }}</label>
-            </div>
-            <b-button @click="submitForm">{{ $t("Save") }}</b-button>
-        </form>
+        <div>
+            <label><input type="checkbox" v-model="active" /> {{ active }}</label>
+        </div>
+        <b-button @click="submitForm">{{ $t("Save") }}</b-button>
     </section>
 </template>
 
@@ -44,15 +42,12 @@ export default {
         };
     },
     methods: {
-        async submitForm(...event) {
-            //event.preventDefault();
+        async submitForm(event) {
+            event.preventDefault();
 
-            console.log(event);
-
-            await this.app.utils.saveData("active", this.active);
-        },
-        setActive(state) {
-            this.active = state;
+            this.app.utils.saveSettings({
+                active: this.active,
+            });
         },
     },
 };
