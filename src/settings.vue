@@ -1,8 +1,50 @@
 <template>
     <section>
-        <div>
-            <label><input type="checkbox" v-model="active" /> {{ active }}</label>
-        </div>
+        <b-form-group
+            :label="`${$t('active')}`"
+            label-for="is-active"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            content-cols-sm
+            content-cols-lg="7"
+        >
+            <b-form-checkbox name="is-active" switch v-model="active"> </b-form-checkbox>
+        </b-form-group>
+
+        <b-form-group
+            :label="`${$t('api-user-name')}`"
+            label-for="api-user-name"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            content-cols-sm
+            content-cols-lg="7"
+        >
+            <b-form-input id="api-user-name" v-model="userName" type="text" required></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+            :label="`${$t('api-user-pass')}`"
+            label-for="api-user-pass"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            content-cols-sm
+            content-cols-lg="7"
+        >
+            <b-form-input id="api-user-pass" v-model="userPass" type="password" required></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+            :label="`${$t('options')}`"
+            label-for="environment"
+            label-cols-sm="4"
+            label-cols-lg="3"
+            content-cols-sm
+            content-cols-lg="7"
+        >
+            <b-form-select id="environment" v-model="optionSelected" :options="options"></b-form-select>
+        </b-form-group>
+
+        <hr />
 
         <b-row class="mt-2">
             <b-col offset-md="3">
@@ -17,14 +59,17 @@
 <style scoped></style>
 
 <script>
-import { BRow, BCol, BButton, BFormCheckbox } from "bootstrap-vue";
+import { BRow, BCol, BFormGroup, BFormInput, BButton, BFormCheckbox, BFormSelect } from "bootstrap-vue";
 
 export default {
     components: {
         BRow,
         BCol,
+        BFormGroup,
+        BFormInput,
         BButton,
         BFormCheckbox,
+        BFormSelect,
     },
     props: {
         app: {
@@ -35,6 +80,15 @@ export default {
     data() {
         return {
             active: false,
+            userName: "",
+            userPass: "",
+
+            options: [
+                { value: "dev", text: "develop" },
+                { value: "acc", text: "staging" },
+                { value: "prod", text: "production" },
+            ],
+            optionSelected: null,
         };
     },
     methods: {
