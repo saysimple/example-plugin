@@ -3,18 +3,26 @@
         <div>
             <label><input type="checkbox" v-model="active" /> {{ active }}</label>
         </div>
-        <b-button @click="submitForm">{{ $t("save") }}</b-button>
+
+        <b-row class="mt-2">
+            <b-col offset-md="3">
+                <b-button id="submit" variant="primary" class="mb-2" @click="submitForm">
+                    {{ $t("save") }}
+                </b-button>
+            </b-col>
+        </b-row>
     </section>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
 
 <script>
-import { BButton, BFormCheckbox } from "bootstrap-vue";
+import { BRow, BCol, BButton, BFormCheckbox } from "bootstrap-vue";
 
 export default {
     components: {
+        BRow,
+        BCol,
         BButton,
         BFormCheckbox,
     },
