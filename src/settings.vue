@@ -3,18 +3,11 @@
         <div>
             <label><input type="checkbox" v-model="active" /> {{ active }}</label>
         </div>
-        <b-button @click="submitForm">{{ $t("Save") }}</b-button>
+        <b-button @click="submitForm">{{ $t("save") }}</b-button>
     </section>
 </template>
 
 <style scoped>
-#apiUrl {
-    width: 255px;
-}
-
-.menu-item textarea {
-    width: 300px;
-}
 </style>
 
 <script>
@@ -34,18 +27,13 @@ export default {
     data() {
         return {
             active: false,
-            carModels: [],
-            apiUrl: null,
-            apiUser: null,
-            apiKey: null,
-            apiUrls: [],
         };
     },
     methods: {
         async submitForm(event) {
             event.preventDefault();
 
-            this.app.utils.saveSettings({
+            await this.app.utils.saveSettings({
                 active: this.active,
             });
         },
@@ -56,34 +44,16 @@ export default {
 <i18n>
 {
   "en": {
-    "Active": "Active",
-    "Stage": "Stage",
-    "API User": "API User",
-    "API Key": "API Key",
-    "Car models": "Car models",
-    "Save": "Save",
-    "Live": "Live",
-    "Acceptance": "Acceptance"
+    "active": "Active",
+    "save": "Save"
   },
   "nl": {
-    "Active": "Actief",
-    "Stage": "Fase",
-    "API User": "API Gebruiker",
-    "API Key": "API Sleutel",
-    "Car models": "Automodellen",
-    "Save": "Opslaan",
-    "Live": "Live",
-    "Acceptance": "Acceptance"
+    "active": "Actief",
+    "save": "Opslaan"
   },
   "es": {
-    "Active": "Activo",
-    "Stage": "Stage",
-    "API User": "Usuario de API",
-    "API Key": "API Key",
-    "Car models": "Modelos de coche",
-    "Save": "Guardar",
-    "Live": "Live",
-    "Acceptance": "Acceptance"
+    "active": "Activo",
+    "save": "Guardar"
   }
 }
 </i18n>

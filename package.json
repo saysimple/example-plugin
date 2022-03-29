@@ -47,6 +47,7 @@
   "dependencies": {},
   "saysimple": {
     "name": "example",
+    "description": "Example description",
     "icon": "./dist/icon.png"
   },
   "publishConfig": {
