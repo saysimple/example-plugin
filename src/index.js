@@ -2,9 +2,11 @@
 import content from "./content.vue";
 import settings from "./settings.vue";
 
+
 // Load package.json information
 // Note: Using pkg because package is a reserved keyword
 const pkg = require("../package.json");
+
 
 const installers = new Map();
 

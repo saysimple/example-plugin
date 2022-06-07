@@ -8,11 +8,11 @@
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-checkbox name="is-active" switch v-model="active"> </b-form-checkbox>
+            <b-form-checkbox name="is-active" switch v-model="active"></b-form-checkbox>
         </b-form-group>
 
         <b-form-group
-            :label="`${$t('api-user-name')}`"
+            :label="$t('api-user-name')"
             label-for="api-user-name"
             label-cols-sm="4"
             label-cols-lg="3"
@@ -59,7 +59,7 @@
 <style scoped></style>
 
 <script>
-import { BRow, BCol, BFormGroup, BFormInput, BButton, BFormCheckbox, BFormSelect } from "bootstrap-vue";
+import { BButton, BCol, BFormCheckbox, BFormGroup, BFormInput, BFormSelect, BRow } from "bootstrap-vue";
 
 export default {
     components: {
@@ -69,13 +69,13 @@ export default {
         BFormInput,
         BButton,
         BFormCheckbox,
-        BFormSelect,
+        BFormSelect
     },
     props: {
         app: {
             type: Object,
-            required: true,
-        },
+            required: true
+        }
     },
     data() {
         return {
@@ -86,10 +86,16 @@ export default {
             options: [
                 { value: "dev", text: "develop" },
                 { value: "acc", text: "staging" },
-                { value: "prod", text: "production" },
+                { value: "prod", text: "production" }
             ],
-            optionSelected: null,
+            optionSelected: null
         };
+    },
+    beforeMount(...args) {
+        console.log("mount", { args });
+    },
+    beforeUpdate(...args) {
+        console.log("update", { args });
     },
     methods: {
         async submitForm(event) {
@@ -97,25 +103,19 @@ export default {
 
             await this.app.utils.saveSettings({
                 active: this.active,
+                userName: this.userName,
+                userPAss: this.userPass,
+                environment: this.optionSelected
             });
-        },
-    },
+        }
+    }
 };
 </script>
 
-<i18n>
+<i18n lang="json">
 {
-  "en": {
-    "active": "Active",
-    "save": "Save"
-  },
-  "nl": {
-    "active": "Actief",
-    "save": "Opslaan"
-  },
-  "es": {
-    "active": "Activo",
-    "save": "Guardar"
-  }
+    "en": {
+        "api-user-name": "Api User [EN]"
+    }
 }
 </i18n>
