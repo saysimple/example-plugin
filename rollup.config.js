@@ -3,7 +3,6 @@ import vue from "rollup-plugin-vue";
 import pkg from "./package.json";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
 
 
 const buildFormats = [{
@@ -27,13 +26,18 @@ const buildFormats = [{
             },
             config: {
                 async: true,
-            }
+            },
         }),
-        terser({
-            output: {
-                ecma: 2020
-            }
-        }),
+        // buble({
+        //     transforms: { asyncAwait: false }
+        // }),
+        // terser({
+        //     output: {
+        //         ecma: 2020
+        //     },
+        //     sourcemap: true,
+        //     compress: false,
+        // }),
         resolve(),
     ],
 
@@ -41,7 +45,9 @@ const buildFormats = [{
         // Externalize so that the output code is readable.
         "vue",
         "vue-runtime-helpers",
-        "vue-i18n"
+        "vue-i18n",
+        "@vue/composition-api",
+        "bootstrap-vue"
     ]
 }];
 

@@ -4,11 +4,12 @@
             :label="`${$t('active')}`"
             label-for="is-active"
             label-cols-sm="4"
+
             label-cols-lg="3"
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-checkbox name="is-active" switch v-model="active"></b-form-checkbox>
+            <b-form-checkbox name="is-active" switch v-model="active.value"></b-form-checkbox>
         </b-form-group>
 
         <b-form-group
@@ -19,7 +20,7 @@
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-input id="api-user-name" v-model="userName" type="text" required></b-form-input>
+            <b-form-input id="api-user-name" v-model="userName.value" type="text" required></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -30,7 +31,7 @@
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-input id="api-user-pass" v-model="userPass" type="password" required></b-form-input>
+            <b-form-input id="api-user-pass" v-model="userPass.value" type="password" required></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -41,7 +42,7 @@
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-select id="environment" v-model="optionSelected" :options="options"></b-form-select>
+            <b-form-select id="environment" v-model="environment.value" :options="options"></b-form-select>
         </b-form-group>
 
         <hr />
@@ -60,6 +61,7 @@
 
 <script>
 import { BButton, BCol, BFormCheckbox, BFormGroup, BFormInput, BFormSelect, BRow } from "bootstrap-vue";
+import { onBeforeMount, onBeforeUpdate, ref } from "@vue/composition-api";
 
 export default {
     components: {
@@ -77,38 +79,54 @@ export default {
             required: true
         }
     },
-    data() {
-        return {
-            active: false,
-            userName: "",
-            userPass: "",
+    setup(props) {
+        const active = ref(props.app.settings.active);
+        const userName = ref(props.app.settings.userName);
+        const userPass = ref(props.app.settings.userPass);
+        const environment = ref(props.app.settings.environment);
 
-            options: [
-                { value: "dev", text: "develop" },
-                { value: "acc", text: "staging" },
-                { value: "prod", text: "production" }
-            ],
-            optionSelected: null
-        };
-    },
-    beforeMount(...args) {
-        console.log("mount", { args });
-    },
-    beforeUpdate(...args) {
-        console.log("update", { args });
-    },
-    methods: {
-        async submitForm(event) {
+        const options = [
+            { value: "dev", text: "develop" },
+            { value: "acc", text: "staging" },
+            { value: "prod", text: "production" }
+        ];
+
+
+        const submitForm = async (event) => {
             event.preventDefault();
-
-            await this.app.utils.saveSettings({
-                active: this.active,
-                userName: this.userName,
-                userPAss: this.userPass,
-                environment: this.optionSelected
+            await props.app.utils.saveSettings({
+                active: active.value,
+                userName: userName.value,
+                userPass: userPass.value,
+                environment: environment.value,
+            })
+            .then(() => {
+                props.app.utils.notify("Saved!", "success")
+            })
+            .catch(() => {
+                props.app.utils.notify("Failed!", "error")
             });
+        };
+
+        const initSettings = () => {
+            active.value = props.app.utils.getSetting("active");
+            userName.value = props.app.utils.getSetting("userName");
+            userPass.value = props.app.utils.getSetting("userPass");
+            environment.value = props.app.utils.getSetting("environment");
+        };
+
+        onBeforeMount(initSettings);
+        onBeforeUpdate(initSettings);
+
+        return {
+            active,
+            userName,
+            userPass,
+            options,
+            environment,
+            submitForm,
         }
-    }
+    },
 };
 </script>
 
