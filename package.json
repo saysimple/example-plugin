@@ -2,9 +2,8 @@
   "name": "@saysimple-plugins/example",
   "version": "1.0.0-local",
   "description": "",
-  "main": "dist/example.ssr.js",
+  "main": "dist/example.esm.js",
   "module": "dist/example.esm.js",
-  "unpkg": "dist/example.min.js",
   "style": "dist/example.css",
   "scripts": {
     "build": "NODE_ENV=production rollup --c rollup.config.js",
