@@ -3,6 +3,7 @@ import vue from "rollup-plugin-vue";
 import pkg from "./package.json";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "rollup-plugin-commonjs";
 
 
 const buildFormats = [{
@@ -28,6 +29,7 @@ const buildFormats = [{
                 async: true,
             },
         }),
+        commonjs(),
         // buble({
         //     transforms: { asyncAwait: false }
         // }),
