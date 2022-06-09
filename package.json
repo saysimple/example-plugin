@@ -52,7 +52,7 @@
   "saysimple": {
     "name": "example",
     "description": "Example description",
-    "icon": "./images/example-logo.png",
+    "icon": "https://mfe.saysimple-test.nl/static/images/plugins/@saysimple-plugins/example/icon.png",
     "dataRequired": [
       "contact",
       "agent",

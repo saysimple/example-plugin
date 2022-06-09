@@ -43,6 +43,7 @@ export default {
         },
         submitForm() {
             this.app.utils.appendToMessage(`This contact is called ${this.appData.contact.name}`);
+            this.app.utils.notify(`This contact is called ${this.appData.contact.name}`);
         }
     }
 };
