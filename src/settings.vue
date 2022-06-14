@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-form-group
-            :label="`${$t('active')}`"
+            :label="`${$t('@saysimple-plugins/example.active')}`"
             label-for="is-active"
             label-cols-sm="4"
 
@@ -13,7 +13,7 @@
         </b-form-group>
 
         <b-form-group
-            :label="$t('api-user-name')"
+            :label="$t('@saysimple-plugins/example.api-user-name')"
             label-for="api-user-name"
             label-cols-sm="4"
             label-cols-lg="3"
@@ -24,7 +24,7 @@
         </b-form-group>
 
         <b-form-group
-            :label="`${$t('api-user-pass')}`"
+            :label="`${$t('@saysimple-plugins/example.api-user-pass')}`"
             label-for="api-user-pass"
             label-cols-sm="4"
             label-cols-lg="3"
@@ -35,7 +35,7 @@
         </b-form-group>
 
         <b-form-group
-            :label="`${$t('options')}`"
+            :label="`${$t('@saysimple-plugins/example.options')}`"
             label-for="environment"
             label-cols-sm="4"
             label-cols-lg="3"
@@ -50,7 +50,7 @@
         <b-row class="mt-2">
             <b-col offset-md="3">
                 <b-button id="submit" variant="primary" class="mb-2" @click="submitForm">
-                    {{ $t("save") }}
+                    {{ $t("@saysimple-plugins/example.save") }}
                 </b-button>
             </b-col>
         </b-row>
@@ -129,11 +129,3 @@ export default {
     },
 };
 </script>
-
-<i18n lang="json">
-{
-    "en": {
-        "api-user-name": "Api User [EN]"
-    }
-}
-</i18n>
