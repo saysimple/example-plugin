@@ -36,7 +36,7 @@ function prefixLocales(locales) {
     return Object.entries(locales)
         .reduce((prefixedLocales, [language, messages]) => {
             prefixedLocales[language] = {
-                [pkg.name]: messages
+                [`@app/${pkg.saysimple.name}`]: messages
             };
 
             return prefixedLocales;

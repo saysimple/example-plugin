@@ -1,7 +1,7 @@
 <template>
     <section>
         <b-form-group
-            :label="`${$t('@saysimple-plugins/example.active')}`"
+            :label="`${$t('@app/example.active')}`"
             label-for="is-active"
             label-cols-sm="4"
 
@@ -9,40 +9,40 @@
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-checkbox name="is-active" switch v-model="active.value"></b-form-checkbox>
+            <b-form-checkbox name="is-active" switch v-model="active"></b-form-checkbox>
         </b-form-group>
 
         <b-form-group
-            :label="$t('@saysimple-plugins/example.api-user-name')"
+            :label="$t('@app/example.api-user-name')"
             label-for="api-user-name"
             label-cols-sm="4"
             label-cols-lg="3"
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-input id="api-user-name" v-model="userName.value" type="text" required></b-form-input>
+            <b-form-input id="api-user-name" v-model="userName" type="text" required></b-form-input>
         </b-form-group>
 
         <b-form-group
-            :label="`${$t('@saysimple-plugins/example.api-user-pass')}`"
+            :label="`${$t('@app/example.api-user-pass')}`"
             label-for="api-user-pass"
             label-cols-sm="4"
             label-cols-lg="3"
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-input id="api-user-pass" v-model="userPass.value" type="password" required></b-form-input>
+            <b-form-input id="api-user-pass" v-model="userPass" type="password" required></b-form-input>
         </b-form-group>
 
         <b-form-group
-            :label="`${$t('@saysimple-plugins/example.options')}`"
+            :label="`${$t('@app/example.options')}`"
             label-for="environment"
             label-cols-sm="4"
             label-cols-lg="3"
             content-cols-sm
             content-cols-lg="7"
         >
-            <b-form-select id="environment" v-model="environment.value" :options="options"></b-form-select>
+            <b-form-select id="environment" v-model="environment" :options="options"></b-form-select>
         </b-form-group>
 
         <hr />
@@ -50,7 +50,7 @@
         <b-row class="mt-2">
             <b-col offset-md="3">
                 <b-button id="submit" variant="primary" class="mb-2" @click="submitForm">
-                    {{ $t("@saysimple-plugins/example.save") }}
+                    {{ $t("@app/example.save") }}
                 </b-button>
             </b-col>
         </b-row>

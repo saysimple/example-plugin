@@ -1,8 +1,7 @@
 <template>
     <section>
-        <h1>{{ $t("@saysimple-plugins/example.TEST_EXAMPLE") }}</h1>
-
-        <button @click="submitForm">{{ $t("@saysimple-plugins/example.click") }}</button>
+        <h1>{{ $t("@app/example.TEST_EXAMPLE") }}</h1>
+        <b-button variant="primary" @click="submitForm">{{ $t("@app/example.click") }}</b-button>
     </section>
 </template>
 
