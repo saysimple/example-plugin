@@ -4,7 +4,6 @@
             :label="`${$t('@app/example.active')}`"
             label-for="is-active"
             label-cols-sm="4"
-
             label-cols-lg="3"
             content-cols-sm
             content-cols-lg="7"
@@ -71,13 +70,13 @@ export default {
         BFormInput,
         BButton,
         BFormCheckbox,
-        BFormSelect
+        BFormSelect,
     },
     props: {
         app: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
     setup(props) {
         const active = ref(props.app.settings.active);
@@ -88,24 +87,24 @@ export default {
         const options = [
             { value: "dev", text: "develop" },
             { value: "acc", text: "staging" },
-            { value: "prod", text: "production" }
+            { value: "prod", text: "production" },
         ];
-
 
         const submitForm = async (event) => {
             event.preventDefault();
-            await props.app.utils.saveSettings({
-                active: active.value,
-                userName: userName.value,
-                userPass: userPass.value,
-                environment: environment.value,
-            })
-            .then(() => {
-                props.app.utils.notify("Saved!", "success")
-            })
-            .catch(() => {
-                props.app.utils.notify("Failed!", "error")
-            });
+            await props.app.utils
+                .saveSettings({
+                    active: active.value,
+                    userName: userName.value,
+                    userPass: userPass.value,
+                    environment: environment.value,
+                })
+                .then(() => {
+                    props.app.utils.notify("Saved!", "success");
+                })
+                .catch(() => {
+                    props.app.utils.notify("Failed!", "error");
+                });
         };
 
         const initSettings = () => {
@@ -116,7 +115,6 @@ export default {
         };
 
         onBeforeMount(initSettings);
-        onBeforeUpdate(initSettings);
 
         return {
             active,
@@ -125,7 +123,7 @@ export default {
             options,
             environment,
             submitForm,
-        }
+        };
     },
 };
 </script>
