@@ -38,7 +38,7 @@
             </b-form-group>
 
             <b-form-group
-                :label="`${$t('@app/example.settings.environment')}`"
+                :label="`${$t('@app/example.settings.environment.label')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -107,9 +107,9 @@ export default {
         const environment = ref(props.app.settings.environment);
 
         const options = [
-            { value: "dev", text: "develop" },
-            { value: "acc", text: "staging" },
-            { value: "prod", text: "production" },
+            { value: "dev", text: i18n.t("@app/example.settings.environment.dev") },
+            { value: "acc", text: i18n.t("@app/example.settings.environment.acc") },
+            { value: "prod", text: i18n.t("@app/example.settings.environment.prod") },
         ];
 
         const submitForm = async () => {
