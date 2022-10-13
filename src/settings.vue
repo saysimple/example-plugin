@@ -1,6 +1,6 @@
 <template>
     <section>
-        <form method="post" @submit.prevent="submitForm">
+        <b-form method="post" @submit.prevent="submitForm">
 
             <!-- START Mandatory, do not change -->
             <b-form-group
@@ -16,7 +16,7 @@
             <!-- END -->
 
             <b-form-group
-                :label="$t('@app/example.api-user-name')"
+                :label="$t('@app/example.settings.api-user-name')"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -27,7 +27,7 @@
             </b-form-group>
 
             <b-form-group
-                :label="`${$t('@app/example.api-user-pass')}`"
+                :label="`${$t('@app/example.settings.api-user-pass')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -38,7 +38,7 @@
             </b-form-group>
 
             <b-form-group
-                :label="`${$t('@app/example.options')}`"
+                :label="`${$t('@app/example.settings.environment')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -61,15 +61,24 @@
             </b-row>
             <!-- END -->
 
-        </form>
+        </b-form>
     </section>
 </template>
 
-<style scoped></style>
-
 <script>
-import { BButton, BCol, BFormCheckbox, BFormGroup, BFormInput, BFormSelect, BRow, BSpinner } from "bootstrap-vue";
+import {
+    BButton,
+    BCol,
+    BForm,
+    BFormCheckbox,
+    BFormGroup,
+    BFormInput,
+    BFormSelect,
+    BRow,
+    BSpinner,
+} from "bootstrap-vue";
 import { onBeforeMount, ref } from "@vue/composition-api";
+import i18n from "@/libs/i18n";
 
 export default {
     components: {
@@ -81,6 +90,7 @@ export default {
         BFormCheckbox,
         BFormSelect,
         BSpinner,
+        BForm,
     },
     props: {
         app: {
@@ -107,24 +117,25 @@ export default {
 
             await props.app.utils
                 .saveSettings({
-                    active: active.value,
+                    active: Boolean(active.value),
                     userName: userName.value,
                     userPass: userPass.value,
                     environment: environment.value,
                 })
                 .then(() => {
-                    props.app.utils.notify("Saved!", "success");
+                    props.app.utils.notify(i18n.t("@app/example.settings.save-success-title"), "success");
                 })
                 .catch(() => {
-                    props.app.utils.notify("Failed!", "error");
-                }).finally(() => isSaving.value = false);
+                    props.app.utils.notify(i18n.t("@app/example.settings.save-error-title"), "error");
+                })
+                .finally(() => isSaving.value = false);
         };
 
         const initSettings = () => {
-            active.value = props.app.utils.getSetting("active");
-            userName.value = props.app.utils.getSetting("userName");
-            userPass.value = props.app.utils.getSetting("userPass");
-            environment.value = props.app.utils.getSetting("environment");
+            active.value = Boolean(props.app.utils.getSetting("active", false));
+            userName.value = props.app.utils.getSetting("userName", "");
+            userPass.value = props.app.utils.getSetting("userPass", "");
+            environment.value = props.app.utils.getSetting("environment", "dev");
         };
 
         onBeforeMount(initSettings);
