@@ -1,16 +1,21 @@
 export const locales = {
     en: {
-        active: "Active",
+        settings: {
+            active: "Active",
+            save: "Save",
+        },
         save: "Save [EN]",
         TEST_EXAMPLE: "Test example [EN]",
         click: "Click",
         "api-user-name": "Username",
         "api-user-pass": "Password",
         options: "Environment",
-
     },
     nl: {
-        active: "Actief",
+        settings: {
+            active: "Actief",
+            save: "Opslaan",
+        },
         save: "Opslaan [NL]",
         TEST_EXAMPLE: "Test example [NL]",
         click: "Klik",
@@ -19,14 +24,15 @@ export const locales = {
         options: "Omgeving",
     },
     es: {
-        active: "Actief",
+        settings: {
+            active: "Activo",
+            save: "Ahorrar",
+        },
         save: "Opslaan [ES]",
         TEST_EXAMPLE: "Test example [ES]",
         click: "Klik",
         "api-user-name": "Gebruikersnaam",
         "api-user-pass": "Wachtwoord",
         options: "Omgeving",
-    }
+    },
 };
-
-

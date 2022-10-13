@@ -1,66 +1,75 @@
 <template>
     <section>
-        <b-form-group
-            :label="`${$t('@app/example.active')}`"
-            label-for="is-active"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            content-cols-sm
-            content-cols-lg="7"
-        >
-            <b-form-checkbox name="is-active" switch v-model="active"></b-form-checkbox>
-        </b-form-group>
+        <form method="post" @submit.prevent="submitForm">
 
-        <b-form-group
-            :label="$t('@app/example.api-user-name')"
-            label-for="api-user-name"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            content-cols-sm
-            content-cols-lg="7"
-        >
-            <b-form-input id="api-user-name" v-model="userName" type="text" required></b-form-input>
-        </b-form-group>
+            <!-- START Mandatory, do not change -->
+            <b-form-group
+                :label="`${$t('@app/example.settings.active')}`"
+                content-cols-lg="7"
+                content-cols-sm
+                label-cols-lg="3"
+                label-cols-sm="4"
+                label-for="active"
+            >
+                <b-form-checkbox id="active" v-model="active" switch></b-form-checkbox>
+            </b-form-group>
+            <!-- END -->
 
-        <b-form-group
-            :label="`${$t('@app/example.api-user-pass')}`"
-            label-for="api-user-pass"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            content-cols-sm
-            content-cols-lg="7"
-        >
-            <b-form-input id="api-user-pass" v-model="userPass" type="password" required></b-form-input>
-        </b-form-group>
+            <b-form-group
+                :label="$t('@app/example.api-user-name')"
+                content-cols-lg="7"
+                content-cols-sm
+                label-cols-lg="3"
+                label-cols-sm="4"
+                label-for="api-user-name"
+            >
+                <b-form-input id="api-user-name" v-model="userName" required type="text"></b-form-input>
+            </b-form-group>
 
-        <b-form-group
-            :label="`${$t('@app/example.options')}`"
-            label-for="environment"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            content-cols-sm
-            content-cols-lg="7"
-        >
-            <b-form-select id="environment" v-model="environment" :options="options"></b-form-select>
-        </b-form-group>
+            <b-form-group
+                :label="`${$t('@app/example.api-user-pass')}`"
+                content-cols-lg="7"
+                content-cols-sm
+                label-cols-lg="3"
+                label-cols-sm="4"
+                label-for="api-user-pass"
+            >
+                <b-form-input id="api-user-pass" v-model="userPass" required type="password"></b-form-input>
+            </b-form-group>
 
-        <hr />
+            <b-form-group
+                :label="`${$t('@app/example.options')}`"
+                content-cols-lg="7"
+                content-cols-sm
+                label-cols-lg="3"
+                label-cols-sm="4"
+                label-for="environment"
+            >
+                <b-form-select id="environment" v-model="environment" :options="options"></b-form-select>
+            </b-form-group>
 
-        <b-row class="mt-2">
-            <b-col offset-md="3">
-                <b-button id="submit" variant="primary" class="mb-2" @click="submitForm">
-                    {{ $t("@app/example.save") }}
-                </b-button>
-            </b-col>
-        </b-row>
+            <!-- START Mandatory, do not change -->
+            <hr />
+
+            <b-row class="mt-2">
+                <b-col offset-md="3">
+                    <b-button :disabled="isSaving" class="mb-2" type="submit" variant="primary">
+                        <b-spinner v-if="isSaving" class="mr-50" small></b-spinner>
+                        {{ $t("@app/example.settings.save") }}
+                    </b-button>
+                </b-col>
+            </b-row>
+            <!-- END -->
+
+        </form>
     </section>
 </template>
 
 <style scoped></style>
 
 <script>
-import { BButton, BCol, BFormCheckbox, BFormGroup, BFormInput, BFormSelect, BRow } from "bootstrap-vue";
-import { onBeforeMount, onBeforeUpdate, ref } from "@vue/composition-api";
+import { BButton, BCol, BFormCheckbox, BFormGroup, BFormInput, BFormSelect, BRow, BSpinner } from "bootstrap-vue";
+import { onBeforeMount, ref } from "@vue/composition-api";
 
 export default {
     components: {
@@ -71,6 +80,7 @@ export default {
         BButton,
         BFormCheckbox,
         BFormSelect,
+        BSpinner,
     },
     props: {
         app: {
@@ -79,6 +89,8 @@ export default {
         },
     },
     setup(props) {
+        const isSaving = ref(false);
+
         const active = ref(props.app.settings.active);
         const userName = ref(props.app.settings.userName);
         const userPass = ref(props.app.settings.userPass);
@@ -90,8 +102,9 @@ export default {
             { value: "prod", text: "production" },
         ];
 
-        const submitForm = async (event) => {
-            event.preventDefault();
+        const submitForm = async () => {
+            isSaving.value = true;
+
             await props.app.utils
                 .saveSettings({
                     active: active.value,
@@ -104,7 +117,7 @@ export default {
                 })
                 .catch(() => {
                     props.app.utils.notify("Failed!", "error");
-                });
+                }).finally(() => isSaving.value = false);
         };
 
         const initSettings = () => {
@@ -117,6 +130,7 @@ export default {
         onBeforeMount(initSettings);
 
         return {
+            isSaving,
             active,
             userName,
             userPass,
