@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-form method="post" @submit.prevent="submitForm">
+        <b-form @submit.prevent="saveSettings">
 
             <!-- START Mandatory, do not change -->
             <b-form-group
@@ -45,7 +45,7 @@
                 label-cols-sm="4"
                 label-for="environment"
             >
-                <b-form-select id="environment" v-model="environment" :options="options"></b-form-select>
+                <b-form-select id="environment" v-model="environment" :options="environmentOptions"></b-form-select>
             </b-form-group>
 
             <!-- START Mandatory, do not change -->
@@ -106,13 +106,13 @@ export default {
         const userPass = ref(props.app.settings.userPass);
         const environment = ref(props.app.settings.environment);
 
-        const options = [
+        const environmentOptions = [
             { value: "dev", text: i18n.t("@app/example.settings.environment.dev") },
             { value: "acc", text: i18n.t("@app/example.settings.environment.acc") },
             { value: "prod", text: i18n.t("@app/example.settings.environment.prod") },
         ];
 
-        const submitForm = async () => {
+        const saveSettings = async () => {
             isSaving.value = true;
 
             await props.app.utils
@@ -145,9 +145,9 @@ export default {
             active,
             userName,
             userPass,
-            options,
             environment,
-            submitForm,
+            environmentOptions,
+            saveSettings,
         };
     },
 };
