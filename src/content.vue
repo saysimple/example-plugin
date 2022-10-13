@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>{{ $t("@app/example.TEST_EXAMPLE") }}</h1>
+        <h1>{{ $t("@app/example.title") }}</h1>
         <b-button variant="primary" @click="submitForm">{{ $t("@app/example.click") }}</b-button>
     </section>
 </template>
@@ -47,7 +47,3 @@ export default {
     }
 };
 </script>
-
-<style scoped lang="scss">
-
-</style>

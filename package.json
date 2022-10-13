@@ -49,8 +49,8 @@
     "vue-template-compiler": "^2.6.11"
   },
   "saysimple": {
-    "name": "example",
-    "description": "Example description",
+    "name": "Example App",
+    "description": "Short description of what the Example app exactly does here.",
     "icon": "https://mfe.saysimple-test.nl/static/images/plugins/@saysimple-plugins/example/icon.png",
     "dataRequired": [
       "contact",

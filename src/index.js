@@ -33,14 +33,23 @@ function installer(name, component) {
 }
 
 function prefixLocales(locales) {
-    return Object.entries(locales)
-        .reduce((prefixedLocales, [language, messages]) => {
-            prefixedLocales[language] = {
-                [`@app/${pkg.saysimple.name}`]: messages
-            };
+    return Object.entries(locales).reduce((prefixedLocales, [language, messages]) => {
+        prefixedLocales[language] = {
+            [`@app/${toKebabCase(pkg.saysimple.name)}`]: messages,
+        };
 
-            return prefixedLocales;
-        }, {});
+        return prefixedLocales;
+    }, {});
+}
+
+function toKebabCase(str) {
+    return (
+        str &&
+        str
+            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+            .map((x) => x.toLowerCase())
+            .join("-")
+    );
 }
 
 // Inject install function into component - allows component
@@ -53,11 +62,11 @@ export default {
     plugin: {
         name: pkg.name,
         version: pkg.version,
-        saysimple: pkg.saysimple
+        saysimple: pkg.saysimple,
     },
     components: {
         settings,
-        content
+        content,
     },
-    locales: prefixLocales(locales)
+    locales: prefixLocales(locales),
 };

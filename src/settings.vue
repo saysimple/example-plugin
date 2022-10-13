@@ -4,7 +4,7 @@
 
             <!-- START Mandatory, do not change -->
             <b-form-group
-                :label="`${$t('@app/example.settings.active')}`"
+                :label="`${$t('@app/example-app.settings.active')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -16,7 +16,7 @@
             <!-- END -->
 
             <b-form-group
-                :label="$t('@app/example.settings.api-user-name')"
+                :label="$t('@app/example-app.settings.api-user-name')"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -27,7 +27,7 @@
             </b-form-group>
 
             <b-form-group
-                :label="`${$t('@app/example.settings.api-user-pass')}`"
+                :label="`${$t('@app/example-app.settings.api-user-pass')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -38,7 +38,7 @@
             </b-form-group>
 
             <b-form-group
-                :label="`${$t('@app/example.settings.environment.label')}`"
+                :label="`${$t('@app/example-app.settings.environment.label')}`"
                 content-cols-lg="7"
                 content-cols-sm
                 label-cols-lg="3"
@@ -55,7 +55,7 @@
                 <b-col offset-md="3">
                     <b-button :disabled="isSaving" class="mb-2" type="submit" variant="primary">
                         <b-spinner v-if="isSaving" class="mr-50" small></b-spinner>
-                        {{ $t("@app/example.settings.save") }}
+                        {{ $t("@app/example-app.settings.save") }}
                     </b-button>
                 </b-col>
             </b-row>
@@ -107,9 +107,9 @@ export default {
         const environment = ref(props.app.settings.environment);
 
         const environmentOptions = [
-            { value: "dev", text: i18n.t("@app/example.settings.environment.dev") },
-            { value: "acc", text: i18n.t("@app/example.settings.environment.acc") },
-            { value: "prod", text: i18n.t("@app/example.settings.environment.prod") },
+            { value: "dev", text: i18n.t("@app/example-app.settings.environment.dev") },
+            { value: "acc", text: i18n.t("@app/example-app.settings.environment.acc") },
+            { value: "prod", text: i18n.t("@app/example-app.settings.environment.prod") },
         ];
 
         const saveSettings = async () => {
@@ -123,10 +123,10 @@ export default {
                     environment: environment.value,
                 })
                 .then(() => {
-                    props.app.utils.notify(i18n.t("@app/example.settings.save-success-title"), "success");
+                    props.app.utils.notify(i18n.t("@app/example-app.settings.save-success-title"), "success");
                 })
                 .catch(() => {
-                    props.app.utils.notify(i18n.t("@app/example.settings.save-error-title"), "error");
+                    props.app.utils.notify(i18n.t("@app/example-app.settings.save-error-title"), "error");
                 })
                 .finally(() => isSaving.value = false);
         };
