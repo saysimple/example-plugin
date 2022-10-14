@@ -15,8 +15,8 @@ export const locales = {
             "save-error-title": "Error saving settings",
         },
         content: {
-            title: "App title",
-            "click-me": "Click me!",
+            title: "Contact Vehicle",
+            "generate-message": "Generate message",
         },
     },
     nl: {
@@ -35,8 +35,8 @@ export const locales = {
             "save-error-title": "Fout bij opslaan settings",
         },
         content: {
-            title: "App title",
-            "click-me": "Click me!",
+            title: "Voertuig contact",
+            "generate-message": "Genereer bericht",
         },
     },
     es: {
@@ -55,8 +55,8 @@ export const locales = {
             "save-error-title": "Error saving settings",
         },
         content: {
-            title: "App title",
-            "click-me": "Click me!",
+            title: "Vehículo de contacto",
+            "generate-message": "Generar mensaje",
         },
     },
 };
