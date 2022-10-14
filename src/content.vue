@@ -1,7 +1,10 @@
 <template>
     <section id="app-example-app">
-        <h5>{{ $t("@app/example-app.content.title") }}</h5>
-        <b-spinner v-if="isLoading" />
+        <h5 class="mb-1">{{ $t("@app/example-app.content.title") }}</h5>
+        <div class="text-center">
+            <b-spinner v-if="isLoading" class="mb-2" />
+        </div>
+
         <table v-if="randomVehicle && !isLoading" class="mb-2">
             <tr>
                 <td>{{ $t("@app/example-app.content.vehicle.name") }}</td>
@@ -21,10 +24,7 @@
             </tr>
             <tr v-if="randomVehicle.cost_in_credits!== 'unknown'">
                 <td>{{ $t("@app/example-app.content.vehicle.cost-in-credits") }}</td>
-                <td>{{ randomVehicle.cost_in_credits }}<br />{{ (randomVehicle.cost_in_credits / 4).toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                }) }}</td>
+                <td>{{ vehicleCost(randomVehicle.cost_in_credits) }}</td>
             </tr>
             <tr>
                 <td>{{ $t("@app/example-app.content.vehicle.length") }}</td>
@@ -120,12 +120,24 @@ export default {
             return Math.floor(Math.random() * max);
         };
 
+        const vehicleCost = (amountInCredits) => {
+            if (amountInCredits == 'unknown') {
+                return;
+            }
+
+            // One imperial credit is about $4
+            return (amountInCredits / 4).toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+            });
+        };
+
         const createMessage = () => {
             props.app.utils.appendToMessage(i18n.t("@app/example-app.content.message-maintenance", {
                 contactName: props.appData.contact.name,
                 vehicleName: randomVehicle.value.name,
                 manufacturer: randomVehicle.value.manufacturer,
-                agentName: props.appData.assignedAgent ? props.appData.assignedAgent.name : "R2-D2"
+                agentName: props.appData.assignedAgent ? props.appData.assignedAgent.name : "R2-D2",
             }));
             //`Dear ${props.appData.contact.name},\n\nYour ${randomVehicle.value.name} is due for some maintenance. Please contact ${randomVehicle.value.manufacturer} for an appointment.\n\nRegards,\n${props.appData.assignedAgent ? props.appData.assignedAgent.name : 'R2-D2'}`);
             props.app.utils.notify(i18n.t("@app/example-app.content.message-generated"));
@@ -136,35 +148,23 @@ export default {
         return {
             isLoading,
             randomVehicle,
+            vehicleCost,
             createMessage,
         };
     },
-    // beforeMount() {
-    //     this.init();
-    // },
-    // beforeUpdate() {
-    //     this.init();
-    // },
-    // methods: {
-    //     init() {
-    //         // Do stuff on when plugin is opened or switched to a new chat
-    //     },
-    //     submitForm() {
-    //
-    //
-    //     }
-    // }
 };
 </script>
 
 <style lang="scss">
-    #app-example-app {
-        table tr td {
-            font-size: 12px;
+#app-example-app {
+    table tr td {
+        font-size: 12px;
+        vertical-align: top;
 
-            &:first-child {
-                font-weight: bold;
-            }
+        &:first-child {
+            font-weight: bold;
+            margin-right: 12px;
         }
     }
+}
 </style>
