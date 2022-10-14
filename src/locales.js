@@ -14,6 +14,10 @@ export const locales = {
             "save-success-title": "Settings saved",
             "save-error-title": "Error saving settings",
         },
+        content: {
+            title: "App title",
+            "click-me": "Click me!",
+        },
     },
     nl: {
         settings: {
@@ -30,6 +34,10 @@ export const locales = {
             "save-success-title": "Settings opgeslagen",
             "save-error-title": "Fout bij opslaan settings",
         },
+        content: {
+            title: "App title",
+            "click-me": "Click me!",
+        },
     },
     es: {
         settings: {
@@ -45,6 +53,10 @@ export const locales = {
             save: "Ahorrar",
             "save-success-title": "Settings saved",
             "save-error-title": "Error saving settings",
+        },
+        content: {
+            title: "App title",
+            "click-me": "Click me!",
         },
     },
 };
