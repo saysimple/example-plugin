@@ -121,7 +121,13 @@ export default {
         };
 
         const createMessage = () => {
-            props.app.utils.appendToMessage(`Dear ${props.appData.contact.name},\n\nYour ${randomVehicle.value.name} is due for some maintenance. Please contact ${randomVehicle.value.manufacturer} for an appointment.\n\nRegards,\n${props.appData.assignedAgent.name}`);
+            props.app.utils.appendToMessage(i18n.t("@app/example-app.content.message-maintenance", {
+                contactName: props.appData.contact.name,
+                vehicleName: randomVehicle.value.name,
+                manufacturer: randomVehicle.value.manufacturer,
+                agentName: props.appData.assignedAgent ? props.appData.assignedAgent.name : "R2-D2"
+            }));
+            //`Dear ${props.appData.contact.name},\n\nYour ${randomVehicle.value.name} is due for some maintenance. Please contact ${randomVehicle.value.manufacturer} for an appointment.\n\nRegards,\n${props.appData.assignedAgent ? props.appData.assignedAgent.name : 'R2-D2'}`);
             props.app.utils.notify(i18n.t("@app/example-app.content.message-generated"));
         };
 

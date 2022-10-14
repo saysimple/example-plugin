@@ -17,6 +17,8 @@ export const locales = {
         content: {
             title: "Contact Vehicle",
             "generate-message": "Generate message",
+            "message-maintenance":
+                "Dear {contactName},\n\nYour {vehicleName} is due for some maintenance. Please contact {manufacturer} for an appointment.\n\nRegards,\n{agentName}",
             "message-generated": "Message generated",
             vehicle: {
                 name: "Name",
@@ -52,6 +54,8 @@ export const locales = {
         content: {
             title: "Voertuig contact",
             "generate-message": "Genereer bericht",
+            "message-maintenance":
+                "Beste {contactName},\n\nUw voertuig {vehicleName} is toe aan wat onderhoud. Neem contact op met {manufacturer} voor een afspraak.\n\nGroet,\n{agentName}",
             "message-generated": "Message generated",
             vehicle: {
                 name: "Name",
@@ -87,6 +91,8 @@ export const locales = {
         content: {
             title: "Vehículo de contacto",
             "generate-message": "Generar mensaje",
+            "message-maintenance":
+                "Dear {contactName},\n\nYour {vehicleName} is due for some maintenance. Please contact {manufacturer} for an appointment.\n\nRegards,\n{agentName}",
             "message-generated": "Message generated",
             vehicle: {
                 name: "Name",
