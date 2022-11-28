@@ -4,6 +4,7 @@ import pkg from "./package.json";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
+import url from "@rollup/plugin-url";
 
 const buildFormats = [
     {
@@ -21,7 +22,14 @@ const buildFormats = [
             css({
                 output: pkg.style
             }),
+            url({
+                include: "assets/**/*",
+                limit: Infinity,
+                publicPath: `plugins/${pkg.name.replace("@saysimple-plugins/", "")}`,
+                fileName: '[name][hash][extname]',
+            }),
             vue({
+                needMap: false,
                 template: {
                     isProduction: true
                 },
@@ -45,6 +53,13 @@ const buildFormats = [
 
         external: [
             // Externalize so that the output code is readable.
+            "@fortawesome/fontawesome-svg-core",
+            "@fortawesome/pro-duotone-svg-icons",
+            "@fortawesome/pro-light-svg-icons",
+            "@fortawesome/pro-regular-svg-icons",
+            "@fortawesome/pro-solid-svg-icons",
+            "@fortawesome/pro-thin-svg-icons",
+            "@fortawesome/sharp-solid-svg-icons",
             "vue",
             "vue-runtime-helpers",
             "vue-i18n",

@@ -1,6 +1,9 @@
 <template>
     <section id="app-example-app">
-        <h5 class="mb-1">{{ $t("@app/example-app.content.title") }}</h5>
+        <h5 class="mb-1">
+          <font-awesome-icon :icon="['fas', 'car-side']" />
+          {{ $t("@app/example-app.content.title") }}
+        </h5>
         <div class="text-center">
             <b-spinner v-if="isLoading" class="mb-2" />
         </div>
@@ -64,7 +67,6 @@
 <script>
 import { BButton, BSpinner, BTable } from "bootstrap-vue";
 import { onBeforeMount, ref } from "@vue/composition-api";
-import i18n from "@/libs/i18n";
 
 export default {
     components: {
@@ -87,6 +89,8 @@ export default {
     setup(props) {
         const isLoading = ref(false);
         const randomVehicle = ref({});
+
+        const i18n = props.app.utils.i18n;
 
         const userName = ref(props.app.settings.userName);
         const userPass = ref(props.app.settings.userPass);
