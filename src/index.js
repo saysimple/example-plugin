@@ -4,8 +4,8 @@ import settings from "./settings.vue";
 import VueCompositionAPI from "@vue/composition-api";
 import Vue from "vue";
 import { locales } from "./locales"
-import {faIcons} from "./faIcons"
-import {icon} from "./icon"
+import { faIcons } from "./faIcons"
+import { icon } from "./icon"
 
 Vue.use(VueCompositionAPI);
 
