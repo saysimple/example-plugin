@@ -62,8 +62,8 @@ module.exports = {
         semi: ["error", "always"],
         // VueJS specific rules: https://eslint.vuejs.org/rules/
         "vue/no-unused-vars": ["error"],
-        "vue/require-v-for-key": "off",
-        "vue/require-valid-default-prop": "off",
-        "@typescript-eslint/no-var-requires": "off",
+        "vue/require-v-for-key": "warn",
+        "vue/require-valid-default-prop": "warn",
+        "@typescript-eslint/no-var-requires": "warn",
     },
 };
