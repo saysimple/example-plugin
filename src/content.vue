@@ -22,7 +22,7 @@
                 <td>{{ $t("@app/example-app.content.vehicle.manufacturer") }}</td>
                 <td>{{ randomVehicle.manufacturer }}</td>
             </tr>
-            <tr v-if="randomVehicle.cost_in_credits!== 'unknown'">
+            <tr v-if="randomVehicle.cost_in_credits !== 'unknown'">
                 <td>{{ $t("@app/example-app.content.vehicle.cost-in-credits") }}</td>
                 <td>{{ vehicleCost(randomVehicle.cost_in_credits) }}</td>
             </tr>
@@ -107,13 +107,13 @@ export default {
             // Pick a random page of vehicles available in SWAPI
             const randomPage = randomNumber(3) + 1;
 
-            randomVehicle.value = await props.app.utils.apiCall({
+            randomVehicle.value = await props.app.utils
+                .apiCall({
                     url: `https://swapi.dev/api/starships/?page=${randomPage}`,
                     method: "GET",
-                },
-            )
+                })
                 .then((result) => result.results[randomNumber(result.results.length)])
-                .finally(() => isLoading.value = false);
+                .finally(() => (isLoading.value = false));
         };
 
         const randomNumber = (max) => {
@@ -121,7 +121,7 @@ export default {
         };
 
         const vehicleCost = (amountInCredits) => {
-            if (amountInCredits == 'unknown') {
+            if (amountInCredits == "unknown") {
                 return;
             }
 
@@ -133,12 +133,14 @@ export default {
         };
 
         const createMessage = () => {
-            props.app.utils.appendToMessage(i18n.t("@app/example-app.content.message-maintenance", {
-                contactName: props.appData.contact.name,
-                vehicleName: randomVehicle.value.name,
-                manufacturer: randomVehicle.value.manufacturer,
-                agentName: props.appData.assignedAgent ? props.appData.assignedAgent.name : "R2-D2",
-            }));
+            props.app.utils.appendToMessage(
+                i18n.t("@app/example-app.content.message-maintenance", {
+                    contactName: props.appData.contact.name,
+                    vehicleName: randomVehicle.value.name,
+                    manufacturer: randomVehicle.value.manufacturer,
+                    agentName: props.appData.assignedAgent ? props.appData.assignedAgent.name : "R2-D2",
+                })
+            );
             //`Dear ${props.appData.contact.name},\n\nYour ${randomVehicle.value.name} is due for some maintenance. Please contact ${randomVehicle.value.manufacturer} for an appointment.\n\nRegards,\n${props.appData.assignedAgent ? props.appData.assignedAgent.name : 'R2-D2'}`);
             props.app.utils.notify(i18n.t("@app/example-app.content.message-generated"));
         };

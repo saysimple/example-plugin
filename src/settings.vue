@@ -1,7 +1,6 @@
 <template>
     <section>
         <b-form @submit.prevent="saveSettings">
-
             <!-- START Mandatory, do not change -->
             <b-form-group
                 :label="`${$t('@app/example-app.settings.active')}`"
@@ -60,7 +59,6 @@
                 </b-col>
             </b-row>
             <!-- END -->
-
         </b-form>
     </section>
 </template>
@@ -128,7 +126,7 @@ export default {
                 .catch(() => {
                     props.app.utils.notify(i18n.t("@app/example-app.settings.save-error-title"), "error");
                 })
-                .finally(() => isSaving.value = false);
+                .finally(() => (isSaving.value = false));
         };
 
         const initSettings = () => {
