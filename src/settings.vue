@@ -10,7 +10,11 @@
                 label-cols-sm="4"
                 label-for="active"
             >
-                <b-form-checkbox id="active" v-model="active" switch></b-form-checkbox>
+                <b-form-checkbox
+                    id="active"
+                    v-model="active"
+                    switch
+                ></b-form-checkbox>
             </b-form-group>
             <!-- END -->
 
@@ -22,7 +26,12 @@
                 label-cols-sm="4"
                 label-for="api-user-name"
             >
-                <b-form-input id="api-user-name" v-model="userName" required type="text"></b-form-input>
+                <b-form-input
+                    id="api-user-name"
+                    v-model="userName"
+                    required
+                    type="text"
+                ></b-form-input>
             </b-form-group>
 
             <b-form-group
@@ -33,7 +42,12 @@
                 label-cols-sm="4"
                 label-for="api-user-pass"
             >
-                <b-form-input id="api-user-pass" v-model="userPass" required type="password"></b-form-input>
+                <b-form-input
+                    id="api-user-pass"
+                    v-model="userPass"
+                    required
+                    type="password"
+                ></b-form-input>
             </b-form-group>
 
             <b-form-group
@@ -44,7 +58,11 @@
                 label-cols-sm="4"
                 label-for="environment"
             >
-                <b-form-select id="environment" v-model="environment" :options="environmentOptions"></b-form-select>
+                <b-form-select
+                    id="environment"
+                    v-model="environment"
+                    :options="environmentOptions"
+                ></b-form-select>
             </b-form-group>
 
             <!-- START Mandatory, do not change -->
@@ -52,8 +70,17 @@
 
             <b-row class="mt-2">
                 <b-col offset-md="3">
-                    <b-button :disabled="isSaving" class="mb-2" type="submit" variant="primary">
-                        <b-spinner v-if="isSaving" class="mr-50" small></b-spinner>
+                    <b-button
+                        :disabled="isSaving"
+                        class="mb-2"
+                        type="submit"
+                        variant="primary"
+                    >
+                        <b-spinner
+                            v-if="isSaving"
+                            class="mr-50"
+                            small
+                        ></b-spinner>
                         {{ $t("@app/example-app.settings.save") }}
                     </b-button>
                 </b-col>
@@ -105,9 +132,18 @@ export default {
         const environment = ref(props.app.settings.environment);
 
         const environmentOptions = [
-            { value: "dev", text: i18n.t("@app/example-app.settings.environment.dev") },
-            { value: "acc", text: i18n.t("@app/example-app.settings.environment.acc") },
-            { value: "prod", text: i18n.t("@app/example-app.settings.environment.prod") },
+            {
+                value: "dev",
+                text: i18n.t("@app/example-app.settings.environment.dev"),
+            },
+            {
+                value: "acc",
+                text: i18n.t("@app/example-app.settings.environment.acc"),
+            },
+            {
+                value: "prod",
+                text: i18n.t("@app/example-app.settings.environment.prod"),
+            },
         ];
 
         const saveSettings = async () => {
@@ -121,10 +157,16 @@ export default {
                     environment: environment.value,
                 })
                 .then(() => {
-                    props.app.utils.notify(i18n.t("@app/example-app.settings.save-success-title"), "success");
+                    props.app.utils.notify(
+                        i18n.t("@app/example-app.settings.save-success-title"),
+                        "success"
+                    );
                 })
                 .catch(() => {
-                    props.app.utils.notify(i18n.t("@app/example-app.settings.save-error-title"), "error");
+                    props.app.utils.notify(
+                        i18n.t("@app/example-app.settings.save-error-title"),
+                        "error"
+                    );
                 })
                 .finally(() => (isSaving.value = false));
         };
@@ -133,7 +175,10 @@ export default {
             active.value = Boolean(props.app.utils.getSetting("active", false));
             userName.value = props.app.utils.getSetting("userName", "");
             userPass.value = props.app.utils.getSetting("userPass", "");
-            environment.value = props.app.utils.getSetting("environment", "dev");
+            environment.value = props.app.utils.getSetting(
+                "environment",
+                "dev"
+            );
         };
 
         onBeforeMount(initSettings);

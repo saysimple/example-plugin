@@ -22,7 +22,9 @@ function installer(name, component) {
 
     // Registers component with vue under the name `plugin-appName-name`
     function install(Vue) {
-        if (install.installed) return;
+        if (install.installed) {
+            return;
+        }
         install.installed = true;
         Vue.use(VueCompositionAPI);
         Vue.component(`plugin-${pkg.saysimple.name}-${name}`, component);
@@ -33,20 +35,25 @@ function installer(name, component) {
 }
 
 function prefixLocales(locales) {
-    return Object.entries(locales).reduce((prefixedLocales, [language, messages]) => {
-        prefixedLocales[language] = {
-            [`@app/${toKebabCase(pkg.saysimple.name)}`]: messages,
-        };
+    return Object.entries(locales).reduce(
+        (prefixedLocales, [language, messages]) => {
+            prefixedLocales[language] = {
+                [`@app/${toKebabCase(pkg.saysimple.name)}`]: messages,
+            };
 
-        return prefixedLocales;
-    }, {});
+            return prefixedLocales;
+        },
+        {}
+    );
 }
 
 function toKebabCase(str) {
     return (
         str &&
         str
-            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+            .match(
+                /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+            )
             .map((x) => x.toLowerCase())
             .join("-")
     );

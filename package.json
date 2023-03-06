@@ -10,6 +10,7 @@
         "watch": "NODE_ENV=production rollup --c rollup.config.js -w",
         "prebuild": "rm -rf dist/",
         "prepublishOnly": "npm run build",
+        "lint": "eslint -c .eslintrc.js . --ext js,vue",
         "husky": "husky install",
         "prettier": "prettier --check  \"src/**/*.{vue,js}\"",
         "prettier:write": "prettier --write \"src/**/*.{vue,js}\""
