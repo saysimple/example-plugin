@@ -1,5 +1,3 @@
-dist
-dev/assets/vendor
-node_modules
-src/node_modules
-src/@core
+dist/
+
+service.yaml

@@ -13,29 +13,32 @@ const buildFormats = [
             file: pkg.module,
             format: "esm",
             exports: "named",
-            sourcemap: true
+            sourcemap: true,
         },
         plugins: [
             replace({
-                "process.env.NODE_ENV": JSON.stringify("production")
+                "process.env.NODE_ENV": JSON.stringify("production"),
             }),
             css({
-                output: pkg.style
+                output: pkg.style,
             }),
             url({
                 include: "assets/**/*",
                 limit: Infinity,
-                publicPath: `plugins/${pkg.name.replace("@saysimple-plugins/", "")}`,
-                fileName: '[name][hash][extname]',
+                publicPath: `plugins/${pkg.name.replace(
+                    "@saysimple-plugins/",
+                    ""
+                )}`,
+                fileName: "[name][hash][extname]",
             }),
             vue({
                 needMap: false,
                 template: {
-                    isProduction: true
+                    isProduction: true,
                 },
                 config: {
-                    async: true
-                }
+                    async: true,
+                },
             }),
             commonjs(),
             // buble({
@@ -48,7 +51,7 @@ const buildFormats = [
             //     sourcemap: true,
             //     compress: false,
             // }),
-            resolve()
+            resolve(),
         ],
 
         external: [
@@ -64,8 +67,8 @@ const buildFormats = [
             "vue-runtime-helpers",
             "vue-i18n",
             "@vue/composition-api",
-            "bootstrap-vue"
-        ]
+            "bootstrap-vue",
+        ],
     },
 ];
 
