@@ -103,7 +103,6 @@ import {
     BSpinner,
 } from "bootstrap-vue";
 import { onBeforeMount, ref } from "@vue/composition-api";
-import i18n from "@/libs/i18n";
 
 export default {
     components: {
@@ -125,6 +124,8 @@ export default {
     },
     setup(props) {
         const isSaving = ref(false);
+
+        const i18n = props.app.utils.i18n;
 
         const active = ref(props.app.settings.active);
         const userName = ref(props.app.settings.userName);

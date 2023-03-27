@@ -7,13 +7,13 @@
     "style": "dist/example.css",
     "scripts": {
         "build": "NODE_ENV=production rollup --c rollup.config.js",
+        "watch": "NODE_ENV=production rollup --c rollup.config.js -w",
         "lint": "eslint -c .eslintrc.js . --ext js,vue",
         "prebuild": "rm -rf dist/",
         "prepare": "husky install",
         "prepublishOnly": "npm run build",
         "prettier": "prettier --check  'src/**/*.{vue,js}'",
-        "prettier:write": "prettier --write 'src/**/*.{vue,js}'",
-        "watch": "NODE_ENV=production rollup --c rollup.config.js -w"
+        "prettier:write": "prettier --write 'src/**/*.{vue,js}'"
     },
     "author": "",
     "license": "ISC",
@@ -25,7 +25,7 @@
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@rollup/plugin-yaml": "^3.1.0",
-        "@vue/composition-api": "^1.3.3",
+        "eslint": "^7.32.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^25.3.0",
         "babel-preset-env": "^1.7.0",
@@ -45,8 +45,6 @@
         "rollup-plugin-replace": "^2.2.0",
         "rollup-plugin-terser": "^5.3.0",
         "rollup-plugin-vue": "^5.1.9",
-        "vue": "^2.6.11",
-        "vue-i18n": "^9.1.9",
         "vue-template-compiler": "^2.6.11",
         "@typescript-eslint/eslint-plugin": "^4.33.0",
         "@typescript-eslint/parser": "^4.33.0",
@@ -56,7 +54,6 @@
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/eslint-config-typescript": "^7.0.0",
         "husky": "^7.0.4",
-        "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.4.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-prettier": "^3.3.1",
@@ -68,7 +65,6 @@
     "saysimple": {
         "name": "Example App",
         "description": "Short description of what the Example app exactly does here.",
-        "icon": "https://mfe.saysimple-test.nl/static/images/plugins/@saysimple-plugins/example/icon.png",
         "dataRequired": [
             "contact",
             "agent",
@@ -80,5 +76,8 @@
     },
     "publishConfig": {
         "@saysimple-plugins:registry": "https://gitlab.just-internet.nl/api/v4/projects/246/packages/npm/"
+    },
+    "dependencies": {
+        "@rollup/plugin-url": "^8.0.1"
     }
 }
