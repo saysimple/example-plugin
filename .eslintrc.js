@@ -1,8 +1,6 @@
 module.exports = {
-    //parser: "vue-eslint-parser",
-    /*plugins: [
-        "eslint-plugin-vue",
-    ],*/
+    parser: "vue-eslint-parser",
+    plugins: ["eslint-plugin-vue"],
     extends: [
         //"eslint:recommended",
         //"plugin:vue/vue3-recommended",
@@ -27,7 +25,11 @@ module.exports = {
         SharedArrayBuffer: "readonly",
     },
     parserOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: {
+            js: "espree",
+            ts: "@typescript-eslint/parser",
+            "<template>": "espree",
+        },
         //ecmaVersion: 2019,
         //ecmaVersion: 2020,
         //sourceType: "module",
