@@ -7,9 +7,9 @@ import { locales } from "./locales";
 import { faIcons } from "./faIcons";
 import { icon } from "./icon";
 
-// Load package.json information
-// Note: Using pkg because package is a reserved keyword
-import pkg from "../package.json";
+// pkg needs to be fetched using require
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require("../package.json");
 
 Vue.use(VueCompositionAPI);
 
