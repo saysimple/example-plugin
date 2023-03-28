@@ -23,6 +23,7 @@ Build:
     artifacts:
         paths:
             - dist/
+            - node_modules/
         expire_in: 1 hours
 
 Publish:
