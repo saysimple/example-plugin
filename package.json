@@ -11,12 +11,12 @@
     "scripts": {
         "build": "NODE_ENV=production rollup --c rollup.config.js",
         "watch": "NODE_ENV=production rollup --c rollup.config.js -w",
-        "lint": "eslint -c .eslintrc.js . --ext js,vue",
+        "lint": "vue-cli-service lint",
         "prebuild": "rm -rf dist/",
         "prepare": "husky install",
         "prepublishOnly": "npm run build",
-        "prettier": "prettier --check  'src/**/*.{vue,js}'",
-        "prettier:write": "prettier --write 'src/**/*.{vue,js}'"
+        "prettier": "prettier --check  'src/**/*.{vue,ts,js}'",
+        "prettier:write": "prettier --write 'src/**/*.{vue,ts,js}'"
     },
     "author": "Saysimple <dev@saysimple.com>",
     "repository": {
