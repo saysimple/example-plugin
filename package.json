@@ -23,6 +23,28 @@
         "type": "git",
         "url": "https://github.com/saysimple/example-plugin"
     },
+    "saysimple": {
+        "name": "Example App",
+        "description": "Short description of what the Example app exactly does here.",
+        "dataRequired": [
+            "contact",
+            "agent",
+            "assignedAgent",
+            "conversation",
+            "messages",
+            "tags"
+        ],
+        "enabledFeatures": [
+            {
+                "enabled": true,
+                "name": "clickable-phone-numbers",
+                "options": {
+                    "type": "link",
+                    "hrefPattern": "tel:{number}"
+                }
+            }
+        ]
+    },
     "license": "Apache-2.0",
     "devDependencies": {
         "@babel/core": "^7.9.0",
@@ -69,18 +91,6 @@
         "typescript": "^4.6.4",
         "vue-eslint-parser": "^9.1.0",
         "vue-template-compiler": "^2.6.11"
-    },
-    "saysimple": {
-        "name": "Example App",
-        "description": "Short description of what the Example app exactly does here.",
-        "dataRequired": [
-            "contact",
-            "agent",
-            "assignedAgent",
-            "conversation",
-            "messages",
-            "tags"
-        ]
     },
     "dependencies": {
         "@rollup/plugin-url": "^8.0.1"
